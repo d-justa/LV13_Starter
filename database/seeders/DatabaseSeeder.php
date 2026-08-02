@@ -15,11 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call([
+            RoleSeeder::class,
+        ]);
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        $user->addMediaFromUrl('https://cdn-icons-png.flaticon.com/512/6596/6596121.png')->toMediaCollection('avatar');
+        $user->assignRole('super-admin');
+        
+        // User::factory(10)->create();
     }
 }
