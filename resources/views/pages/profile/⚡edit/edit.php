@@ -38,7 +38,7 @@ new class extends Component
 
         $activity = Activity::latest()->first();
         $activity->update([
-            'event' => 'profile.updated',
+            'event' => 'user.profile.updated',
             'description' => 'User Profile Updated'
         ]);
     }

@@ -23,8 +23,8 @@
         </flux:sidebar.header>
 
         <flux:sidebar.nav>
-            <flux:sidebar.item icon="home" href="#" current>Home</flux:sidebar.item>
-            <flux:sidebar.item icon="inbox" badge="12" href="#">Inbox</flux:sidebar.item>
+            <flux:sidebar.item icon="home" :href="route('dashboard')">Dashboard</flux:sidebar.item>
+            <flux:sidebar.item icon="users" :href="route('users.index')">Users</flux:sidebar.item>
             <flux:sidebar.item icon="document-text" href="#">Documents</flux:sidebar.item>
             <flux:sidebar.item icon="calendar" href="#">Calendar</flux:sidebar.item>
 
@@ -39,7 +39,7 @@
 
         <flux:sidebar.nav>
             <flux:sidebar.item icon="cog-6-tooth" href="#">Settings</flux:sidebar.item>
-            <flux:sidebar.item icon="information-circle" href="#">Help</flux:sidebar.item>
+            <flux:sidebar.item icon="information-circle" :href="route('audit.index')">Activity Logs</flux:sidebar.item>
         </flux:sidebar.nav>
 
         <flux:dropdown position="top" align="start" class="max-lg:hidden">

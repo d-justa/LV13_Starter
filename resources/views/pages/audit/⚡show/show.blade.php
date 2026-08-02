@@ -50,27 +50,30 @@
 
         <div class="grid gap-6 lg:grid-cols-2">
 
-            <flux:card class="space-y-4">
-                <flux:heading>Previous Values</flux:heading>
-                <flux:table>
-                    <flux:table.rows>
-                        @foreach ($this->activity->attribute_changes['old'] as $key => $value)
-                            <flux:table.row>
-                                <flux:table.cell>
-                                    <span class="font-medium">
-                                        {{ Str::headline($key) }}
-                                    </span>
-                                </flux:table.cell>
-                                <flux:table.cell>
-                                    <span class="text-zinc-600">
-                                        {{ blank($value) ? '—' : $value }}
-                                    </span>
-                                </flux:table.cell>
-                            </flux:table.row>
-                        @endforeach
-                    </flux:table.rows>
-                </flux:table>
-            </flux:card>
+            @isset ($this->activity->attribute_changes['old'])
+                <flux:card class="space-y-4">
+                    <flux:heading>Previous Values</flux:heading>
+                    <flux:table>
+                        <flux:table.rows>
+                            @foreach ($this->activity->attribute_changes['old'] as $key => $value)
+                                <flux:table.row>
+                                    <flux:table.cell>
+                                        <span class="font-medium">
+                                            {{ Str::headline($key) }}
+                                        </span>
+                                    </flux:table.cell>
+                                    <flux:table.cell>
+                                        <span class="text-zinc-600">
+                                            {{ blank($value) ? '—' : $value }}
+                                        </span>
+                                    </flux:table.cell>
+                                </flux:table.row>
+                            @endforeach
+                        </flux:table.rows>
+                    </flux:table>
+                </flux:card>
+            @endisset
+
 
             <flux:card class="space-y-4">
                 <flux:heading>New Values</flux:heading>

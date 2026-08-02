@@ -15,6 +15,7 @@ class AuthController extends Controller
 {
     public function logout()
     {
+        UserAuditService::logout();
         Auth::logout();
         Session::invalidate();
         Session::regenerateToken();
@@ -41,6 +42,8 @@ class AuthController extends Controller
          */
         if (! $user) {
             if (Route::has('register') || true) {
+                activity()->disableLogging();
+
                 $name = $socialUser->getName();
                 $avatarUrl = $socialUser->getAvatar();
 
@@ -53,6 +56,7 @@ class AuthController extends Controller
                     $user->addMediaFromUrl($avatarUrl)->toMediaCollection('avatar');
                 }
 
+                activity()->enableLogging();
                 UserAuditService::registered($user, $provider);
             } else {
                 return to_route('login')->withErrors([
@@ -66,6 +70,7 @@ class AuthController extends Controller
         }
 
         Auth::login($user);
+        UserAuditService::login();
         session()->regenerate();
         return to_route('dashboard');
     }

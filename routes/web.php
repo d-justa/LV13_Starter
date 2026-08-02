@@ -24,7 +24,11 @@ Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::livewire('/profile', 'pages::profile.edit')->name('profile.edit');
 
+    //
+    Route::view('/users', 'pages.users.index')->name('users.index');
+
     // Activity Logs / Audit
+    Route::view('/audits', 'pages.audit.index')->name('audit.index');
     Route::livewire('/audits/{activity}', 'pages::audit.show')->name('audits.show');
 });
 

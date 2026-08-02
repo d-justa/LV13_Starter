@@ -25,4 +25,28 @@ class UserAuditService
             ->event('user.registered')
             ->log($provider ? 'New User Registered using Social Login' : 'New User Registered');
     }
+
+    public static function login()
+    {
+        return activity()
+            ->withProperties([
+                'ip'         => request()->ip(),
+                'user_agent' => request()->userAgent(),
+                'url'        => request()->fullUrl(),
+            ])
+            ->event('user.login')
+            ->log('User logged in');
+    }
+
+    public static function logout()
+    {
+        return activity()
+            ->withProperties([
+                'ip'         => request()->ip(),
+                'user_agent' => request()->userAgent(),
+                'url'        => request()->fullUrl(),
+            ])
+            ->event('user.logout')
+            ->log('User logged out');
+    }
 }
