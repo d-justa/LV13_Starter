@@ -79,7 +79,7 @@ final class ActivityLogsTable extends PowerGridComponent
     public function filters(): array
     {
         return [
-            Filter::datetimepicker('created_at'),
+            Filter::datepicker('created_at'),
             Filter::select('event', 'event')
                 ->dataSource(
                     Activity::query()
@@ -94,17 +94,11 @@ final class ActivityLogsTable extends PowerGridComponent
         ];
     }
 
-    #[\Livewire\Attributes\On('edit')]
-    public function edit($rowId): void
-    {
-        $this->js('alert(' . $rowId . ')');
-    }
-
     public function actions(Activity $row): array
     {
         return [
-            Button::add('edit')
-                ->slot('View')
+            Button::add('view')
+                ->icon('default-eye')
                 ->id()
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
                 ->route('audits.show', [$row->id]),

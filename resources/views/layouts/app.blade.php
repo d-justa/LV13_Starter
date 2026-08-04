@@ -49,6 +49,14 @@
                 <flux:menu.item icon="user" :href="route('profile.edit')">Manage Profile</flux:menu.item>
 
                 <flux:menu.separator />
+                @if(session()->has('impersonator_id'))
+                    <form method="POST" action="{{ route('impersonation.stop') }}">
+                        @csrf
+                        <flux:button type="submit" variant="danger" size="xs" class="w-full my-2">
+                            Return to Admin
+                        </flux:button>
+                    </form>
+                @endif
 
                 <form action="{{ route('logout') }}" method="post">
                     @csrf

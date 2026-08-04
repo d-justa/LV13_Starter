@@ -23,7 +23,7 @@ return [
 
     'icon_resources' => [
         'paths' => [
-            // 'default' => 'resources/views/components/icons',
+            'default' => 'resources/views/flux/icon',
             // 'outline' => 'vendor/wireui/wireui/resources/views/components/icons/outline',
             // 'solid'   => 'vendor/wireui/wireui/resources/views/components/icons/solid',
         ],
@@ -32,7 +32,7 @@ return [
             // 'pencil',
         ],
 
-        'attributes' => ['class' => 'w-5 text-red-600'],
+        'attributes' => ['class' => 'w-4'],
     ],
 
     /*

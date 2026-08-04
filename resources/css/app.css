@@ -2,6 +2,8 @@
 @import '../../vendor/livewire/flux/dist/flux.css';
 @import '../../vendor/power-components/livewire-powergrid/resources/css/tailwind4.css';
 
+@import "flatpickr/dist/flatpickr.min.css";
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
@@ -23,4 +25,8 @@
 
 [data-flux-card] {
     @apply bg-gray-50 shadow;
+}
+
+.pg-btn-white {
+    @apply px-2 py-1;
 }

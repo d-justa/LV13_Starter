@@ -5,6 +5,9 @@
             <flux:text class="mt-2">Welcome back!</flux:text>
         </div>
         <flux:error name="oAuth" class="text-center" />
+        @if (session('success'))
+           <flux:callout variant="success" :heading="session('success')" />
+        @endif
         <flux:separator />
 
         <form wire:submit="login" class="space-y-4">
@@ -14,7 +17,7 @@
                 <div class="flex justify-between">
                     <flux:label>Password</flux:label>
 
-                    <flux:link href="#" variant="subtle" class="text-sm">Forgot password?</flux:link>
+                    <flux:link :href="route('password.request')" variant="subtle" class="text-sm">Forgot password?</flux:link>
                 </div>
                 <flux:input type="password" placeholder="Your password" wire:model="password" />
                 <flux:error name="password" />

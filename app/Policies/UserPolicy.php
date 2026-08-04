@@ -64,4 +64,15 @@ class UserPolicy
     {
         return false;
     }
+
+    /**
+     * Determine whether the user can impersonate the model.
+     */
+    public function impersonate(User $user, User $model): bool
+    {
+        return !$model->hasRole('super-admin') // Super admins cannot be impersonated
+            && $user->id != $model->id // User can't impersonate itself
+            && $user->hasRole('super-admin') // Only super-admins can impersonate other users
+            && true;
+    }
 }

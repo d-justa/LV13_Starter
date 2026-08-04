@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ImpersonationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -40,10 +41,18 @@ Route::middleware('auth')->group(function () {
  */
 Route::middleware('guest')->group(function () {
     Route::livewire('/login', 'pages::auth.login')->name('login');
+    Route::livewire('/forgot-password', 'pages::auth.forgot-password')->name('password.request');
+    Route::livewire('/reset-password/{token}', 'pages::auth.reset-password')->name('password.reset');
 
     // OAuth Routes
     Route::get('/auth/redirect/{provider}', [AuthController::class, 'oAuthRedirect'])->name('oAuthRedirect');
     Route::get('/auth/callback/{provider}', [AuthController::class, 'oAuthCallback'])->name('oAuthCallback');
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    // Impersonation
+    Route::post('/users/{user}/impersonate', [ImpersonationController::class, 'start'])->name('impersonation.start');
+    Route::post('/impersonation/stop', [ImpersonationController::class, 'stop'])->name('impersonation.stop');
+});

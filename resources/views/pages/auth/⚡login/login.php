@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Services\Audits\Models\UserAuditService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
@@ -27,6 +28,7 @@ new #[Layout('layouts::auth')] class extends Component
             ]);
         }
 
+        UserAuditService::login();
         session()->regenerate();
 
         return redirect()->intended(route('dashboard'));
@@ -58,6 +60,7 @@ new #[Layout('layouts::auth')] class extends Component
 
         if ($result->isOk()) {
             request()->session()->regenerate();
+            UserAuditService::login();
             return redirect()->intended('dashboard');
         }
 

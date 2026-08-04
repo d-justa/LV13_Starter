@@ -5,6 +5,9 @@ namespace App\Livewire\PowerGridTables;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Livewire\Attributes\On;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Facades\Filter;
@@ -45,7 +48,7 @@ final class UsersTable extends PowerGridComponent
             ->add('id')
             ->add('name')
             ->add('email')
-            ->add('created_at_formatted', fn (User $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+            ->add('created_at_formatted', fn(User $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
     public function columns(): array
@@ -74,20 +77,25 @@ final class UsersTable extends PowerGridComponent
         ];
     }
 
-    #[\Livewire\Attributes\On('edit')]
-    public function edit($rowId): void
+    #[On('impersonate')]
+    public function impersonate(User $user)
     {
-        $this->js('alert('.$rowId.')');
+        session(['impersonator_id' => Auth::id()]);
+        Auth::login($user);
+        return to_route('dashboard');
     }
 
     public function actions(User $row): array
     {
         return [
-            Button::add('edit')
-                ->slot('Edit: '.$row->id)
+            Button::add('impersonate')
+                ->icon('default-hat-glasses', ['class' => '!text-indigo-500'])
+                // ->slot('Impersonate')
                 ->id()
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id])
+                ->dispatch('impersonate', ['user' => $row])
+                ->can(Gate::allows('impersonate', $row))
+                ->tooltip('Impersonate')
         ];
     }
 
