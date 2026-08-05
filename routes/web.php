@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Session;
  * WEBSITE / GUEST ROUTES
  * ---------------------------
  */
-Route::get('/', function () {
-    return view('welcome');
+Route::name('website.')->group(function() {
+    Route::livewire('/', 'website::home')->name('home');
 });
 
 

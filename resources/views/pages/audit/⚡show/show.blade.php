@@ -37,7 +37,7 @@
             @foreach ($activity->properties as $key => $value)
                 <div>
                     <flux:label class="!mb-0">{{ Str::title($key) }}</flux:label>
-                    <flux:text>
+                    <flux:text class="break-all">
                         {{ $activity->getProperty($key) }}
                     </flux:text>
                 </div>
