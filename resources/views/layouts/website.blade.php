@@ -14,16 +14,14 @@
 
 <body class="min-h-screen flex flex-col bg-gray-100">
 
-    <header>
-        Header
-    </header>
+    <x-website.headers.1 />
 
-    <main class="flex-1 flex flex-col">
+    <main class="flex-1">
         {{ $slot }}
     </main>
 
     <footer class="bg-slate-900 text-white p-4">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-2 text-sm">
+        <div class="mx-auto container flex flex-col md:flex-row justify-between items-center gap-2 text-sm">
             <p class="text-center">Copyright &copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
             <p class="text-center">Made with ❤️ by <a href="#" target="_blank" class="text-blue-500 hover:underline">Netgen IT Solutions</a></p>
         </div>

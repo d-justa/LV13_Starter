@@ -57,6 +57,7 @@ class AuthController extends Controller
                 }
 
                 activity()->enableLogging();
+                $user->sendWelcomeNotification();
                 UserAuditService::registered($user, $provider);
             } else {
                 return to_route('login')->withErrors([

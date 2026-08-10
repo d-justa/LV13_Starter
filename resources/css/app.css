@@ -23,8 +23,13 @@
     @apply mb-2;
 }
 
+[data-flux-field]:has([data-flux-control][required]) > [data-flux-label]::after {
+    content: ' *';
+    @apply text-red-500 ml-1;
+}
+
 [data-flux-card] {
-    @apply bg-gray-50 shadow;
+    @apply bg-gray-50 dark:bg-gray-800 shadow;
 }
 
 .pg-btn-white {

@@ -1,10 +1,16 @@
 <div>
     <div>
         <flux:heading size="xl" level="1">Manage Profile</flux:heading>
-        <flux:text class="mt-2 mb-6 text-base">
+        <flux:text class="mt-2 text-base">
             <span class="font-medium">Role:</span>
             {{ Str::title(auth()->user()->getRoleNames()->first() ?? 'No Role Assigned') }}
         </flux:text>
+        @env(['development', 'local'])
+            <flux:text class="mt-2 mb-6 text-base">
+                <span class="font-medium">User ID:</span>
+                {{ Auth::id() }} (Visible on development only)
+            </flux:text>
+        @endenv
         <flux:separator variant="subtle" class="my-6" />
     </div>
 
