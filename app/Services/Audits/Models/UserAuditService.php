@@ -20,7 +20,7 @@ class UserAuditService
             ->performedOn($user)
             ->causedBy($user)
             ->withProperties([
-                'provider' => $provider
+                'provider' => $provider ?? 'N/A'
             ])
             ->event('user.registered')
             ->log($provider ? 'New User Registered using Social Login' : 'New User Registered');

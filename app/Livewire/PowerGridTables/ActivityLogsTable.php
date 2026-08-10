@@ -79,7 +79,7 @@ final class ActivityLogsTable extends PowerGridComponent
     public function filters(): array
     {
         return [
-            Filter::datepicker('created_at'),
+            Filter::datetimepicker('created_at'),
             Filter::select('event', 'event')
                 ->dataSource(
                     Activity::query()

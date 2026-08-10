@@ -1,8 +1,8 @@
 <div class="flex-1 flex justify-center items-center p-2">
     <flux:card class="w-full md:w-2xl space-y-6">
         <div class="text-center">
-            <flux:heading size="xl">Log in to your account</flux:heading>
-            <flux:text class="mt-2">Welcome back!</flux:text>
+            <flux:heading size="xl">Welcome back</flux:heading>
+            <flux:text class="mt-2">Log in to your account and pick up right where you left off.</flux:text>
         </div>
         <flux:error name="oAuth" class="text-center" />
         @if (session('success'))
@@ -40,7 +40,7 @@
 
         @if (Route::has('register'))
             <flux:separator />
-            <flux:button variant="ghost" class="w-full">Sign up for a new account</flux:button>
+            <flux:button :href="route('register')" variant="ghost" class="w-full">Sign up for a new account</flux:button>
         @endif
     </flux:card>
 

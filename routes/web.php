@@ -44,6 +44,9 @@ Route::middleware('guest')->group(function () {
     Route::livewire('/forgot-password', 'pages::auth.forgot-password')->name('password.request');
     Route::livewire('/reset-password/{token}', 'pages::auth.reset-password')->name('password.reset');
 
+    // Register - Comment this if application doesn't allow registration of new users
+    Route::livewire('/register', 'pages::auth.register')->name('register');
+
     // OAuth Routes
     Route::get('/auth/redirect/{provider}', [AuthController::class, 'oAuthRedirect'])->name('oAuthRedirect');
     Route::get('/auth/callback/{provider}', [AuthController::class, 'oAuthCallback'])->name('oAuthCallback');
